@@ -168,7 +168,7 @@ export default function Dashboard() {
         </div>
 
         {showMenu && (
-          <div className="absolute right-4 top-14 bg-card border border-border rounded-lg shadow-lg p-2 w-48 z-50">
+          <div className="absolute right-100 top-14 bg-card border border-border rounded-lg shadow-lg p-2 w-48 z-50">
             <Button variant="ghost" className="w-full justify-start" onClick={() => setShowMenu(false)}>
               <Settings className="h-4 w-4 mr-2" />
               Settings
@@ -186,14 +186,31 @@ export default function Dashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg">This Month's Budget</CardTitle>
-              <Badge variant="secondary">May</Badge>
+              <Badge variant="secondary">
+                {new Date().toLocaleString("default", { month: "long" })}
+              </Badge>
             </CardHeader>
             <CardContent className="space-y-3">
               <div>
                 <div className="text-2xl font-bold">
                   ${budget.spent} / ${budget.total}
                 </div>
-                <Progress value={Number.parseFloat(budget.percentage)} className="mt-2 h-2" />
+                 {/* Multi-colored progress bar */}
+                      <div className="w-full h-2 flex rounded overflow-hidden bg-gray-200 mt-2">
+                        <div
+                          className="bg-rose-500"
+                          style={{ width: `${(budget.savings / budget.total) * 100}%` }}
+                        ></div>
+                        <div
+                          className="bg-amber-500"
+                          style={{ width: `${(budget.food / budget.total) * 100}%` }}
+                        ></div>
+                        <div
+                          className="bg-indigo-500"
+                          style={{ width: `${(budget.leisure / budget.total) * 100}%` }}
+                        ></div>
+
+                    </div>
               </div>
               <div className="flex items-center gap-4 text-xs">
                 <div className="flex items-center gap-1">
