@@ -340,7 +340,7 @@ export default function CategoryView({ category, onBack }: CategoryViewProps) {
             <CardTitle className="text-lg">Progress Tracking</CardTitle>
             <CardDescription>Your journey over time</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="overflow-visible">
             <ResponsiveContainer width="100%" height={200}>
               {category === "finance" || category === "activities" ? (
                 <BarChart data={data.chartData}>
@@ -352,11 +352,14 @@ export default function CategoryView({ category, onBack }: CategoryViewProps) {
                   />
                   <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
                   <Tooltip
+                  wrapperStyle={{ zIndex: 9999 }}
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
                       border: "1px solid hsl(var(--border))",
                       borderRadius: "8px",
                     }}
+                    itemStyle={{ color: "#000000" }} // <-- sets the value color to white
+                      labelStyle={{ color: "hsl(var(--muted-foreground))" }} // optional: keep month label a different color
                   />
                   <Bar
                     dataKey={Object.keys(data.chartData[0])[1]}
@@ -374,11 +377,14 @@ export default function CategoryView({ category, onBack }: CategoryViewProps) {
                   />
                   <YAxis stroke="hsl(var(--muted-foreground))" fontSize={12} />
                   <Tooltip
+                    wrapperStyle={{ zIndex: 9999 }}
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
                       border: "1px solid hsl(var(--border))",
                       borderRadius: "8px",
                     }}
+                    itemStyle={{ color: "#ffffff" }} // <-- sets the value color to white
+                      labelStyle={{ color: "hsl(var(--muted-foreground))" }} // optional: keep month label a different color
                   />
                   <Line
                     type="monotone"
